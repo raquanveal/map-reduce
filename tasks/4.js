@@ -15,8 +15,6 @@ var mapCode = function() {
 
 // Now that collections are grouped by state, find city with min pop
 var reduceCode = function(key, values) {
-	// Add all city populations in a given state to an array
-
 	var reduced = {"data":[]};
 	for (var i in values) {
 		var inter = values[i];
