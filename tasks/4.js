@@ -15,19 +15,18 @@ var mapCode = function() {
 
 var reduceCode = function(key, values) {
 	var reduced = {"data":[]};
+	
 	for (var i in values) {
 		var inter = values[i];
 		for (var j in inter.data) {
 			reduced.data.push(inter.data[j]);
 		}
 	}
-
-
+	
 	return reduced;
  }
 
 var finalize = function (key, reduced) {
-
 	var min_pop = 999999999999;
 	let city;
 
