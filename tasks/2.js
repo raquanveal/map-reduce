@@ -59,5 +59,5 @@ var finalize =  function (key, reduced) {
    out: "closest_distinct_cities_by_state",
    finalize: finalize
 })
-   
+
 db.closest.find().forEach(printjson)
