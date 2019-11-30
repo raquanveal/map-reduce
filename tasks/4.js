@@ -13,7 +13,6 @@ var mapCode = function() {
 	});
 }
 
-// Now that collections are grouped by state, find city with min pop
 var reduceCode = function(key, values) {
 	var reduced = {"data":[]};
 	for (var i in values) {
