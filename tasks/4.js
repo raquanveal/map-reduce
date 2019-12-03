@@ -1,50 +1,29 @@
 /* Finds the city with the smallest population for each state. */
 
-// Groups the data by state. Each collection knows its city and population.
 var mapCode = function() {
-   emit(this._id.state,
-     { "data":
-		[
-			{
-				"city": this._id.city,
-				"pop":  this.value,
-			}
-		]
+   emit(this._id.state, { 
+		"city": this._id.city,
+		"pop": this.value.pop
 	});
 }
 
 var reduceCode = function(key, values) {
-	var reduced = {"data":[]};
-	
+	let min = 999999999999;
+	let name = undefined;
+
 	for (var i in values) {
-		var inter = values[i];
-		for (var j in inter.data) {
-			reduced.data.push(inter.data[j]);
-		}
-	}
-	
-	return reduced;
- }
+		let city = values[i];
 
-var finalize = function (key, reduced) {
-	var min_pop = 999999999999;
-	let city;
-
-	for (var i in reduced.data) {
-		let c = reduced.data[i].city;
-		pop = reduced.data[i].pop;
-		
-		if (pop < min_pop) {
-			min_pop = pop;
-			city = c;
+		if (city.pop < min) {
+			min = city.pop;
+			name = city.city;
 		}
 	}
 
-	return {"city": city, "pop": min_pop};
+	return {"city": name, "pop": min };
 }
+
 
 db.city_populations.mapReduce(mapCode, reduceCode, {
 	out: "smallest_state_cities",
-	finalize: finalize
 })
- 

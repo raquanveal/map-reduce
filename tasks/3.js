@@ -2,7 +2,7 @@
 
 // Group by state and city
 var mapCode = function() {
-   emit({"city" : this.city, "state" : this.state}, this.pop);
+   emit({"city" : this.city, "state" : this.state}, {"pop" : this.pop});
 }
 
 // If there are multiple cities in a state with the same name, sum their pops.
