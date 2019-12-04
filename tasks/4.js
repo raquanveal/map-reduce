@@ -1,26 +1,26 @@
-/* Finds the city with the smallest population for each state. */
+/* Finds the city with the largest population for each state. */
 
 var mapCode = function() {
    emit(this._id.state, { 
 		"city": this._id.city,
-		"pop": this.value.pop
+		"pop": this.value
 	});
 }
 
 var reduceCode = function(key, values) {
-	let min = 999999999999;
+	let max = 0;
 	let name = undefined;
 
 	for (var i in values) {
 		let city = values[i];
 
-		if (city.pop < min) {
-			min = city.pop;
+		if (city.pop > max) {
+			max = city.pop;
 			name = city.city;
 		}
 	}
 
-	return {"city": name, "pop": min };
+	return {"city": name, "pop": max };
 }
 
 
